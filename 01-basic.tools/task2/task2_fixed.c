@@ -22,7 +22,7 @@ void sort(item * a, int n)
 	for (; i < n && s != 0; i++)
 	{
 		s = 0;
-		for (j = 0; j < n; j++)
+		for (j = 0; j < n - i - 1; j++)
 		{
 			if (a[j].key > a[j + 1].key)
 			{
@@ -32,7 +32,7 @@ void sort(item * a, int n)
 				s++;
 			}
 		}
-		n--;
+		// n--;
 	}
 }
 
@@ -45,7 +45,7 @@ void print_arr(item *arr, int arr_size) {
 
 int main()
 {
-	sort(array, 5);
+	sort(array, 6);
 	
 	print_arr(array, 6);
 
