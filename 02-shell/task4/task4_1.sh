@@ -4,6 +4,6 @@ while [ $# -gt 0 ]
 do
 	result=`expr $result '*' $1`
 	#请添加代码，使用shift指令完成向左移动参数
-	
+	shift 1
 done
 echo $result

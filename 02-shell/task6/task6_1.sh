@@ -8,7 +8,7 @@ do
 		echo "the file is existing Please input a new file"
 	else
 		#请添加此处代码，使用mkdir命令创建目录
-		
+		mkdir $a
 		
 		echo "you are sussesful!"
 		break

@@ -5,11 +5,11 @@ do
 	then b=0
 	else
 	#请补充一下代码，使用awk命令打印指定内容
-		a=$(ls -l $filename |    '{ print $5 }')
+		a=$(ls -l $filename | awk '{ print $5 }')
 			#请补充一下代码,判断文件a大小是否等于0
-			if 
+			if [ "$a" -eq 0 ];
 			#请补充一下代码,使用rm命令删除文件
-				then 
+				then rm "$filename"
 			fi
 	fi
 done

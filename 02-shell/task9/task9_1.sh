@@ -6,7 +6,7 @@ m=1
 while [ $i -le $n ];
 do
 	#请添加此处代码，完成对m进行累乘
-	
+	let m=m*i
 	((i=i+1))
 done
 echo $m
