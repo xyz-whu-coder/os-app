@@ -1,0 +1,3 @@
+[submodule "01-basic.tools/task6/git-basics"]
+	path = 01-basic.tools/task6/git-basics
+	url = https://github.com/xyz-whu-coder/git-basics.git
