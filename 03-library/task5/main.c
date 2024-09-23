@@ -16,6 +16,8 @@ int main(int argc,char *argv[])
     char *error;
     //请添加代码，以RTLD_LAZY模式，动态打开argv[3]所指向的动态库，返回值赋值给lib_handle
 
+    lib_handle = dlopen(argv[3], RTLD_LAZY);
+
 
     if (!lib_handle) 
     {
@@ -24,8 +26,12 @@ int main(int argc,char *argv[])
     }
     //请添加代码，获取lib_handle中的关键函数add的地址，并赋值给add
 
+    add = (int(*)())dlsym(lib_handle, "add");
+
 
     printf("%d + %d = %d\n", a, b, add(a,b));
+
+    dlclose(lib_handle);
 
     return 0;
 }

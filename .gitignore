@@ -2,3 +2,8 @@
 .DS_Store
 *.o
 
+*.a
+*.so
+main
+main_static
+main_dynamic
