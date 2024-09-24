@@ -6,24 +6,29 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
 int variable;
-int do_something() {
+
+int do_something()
+{
 	variable = 42;
 	printf("in child process\n");
 	return 0;
 }
-int main(int argc, char *argv[]) {
+
+int main(int argc, char *argv[])
+{
 	void *child_stack;
 	char tempch;
 	variable = 9;
 
 	child_stack = (void *)malloc(16384);
-	printf("The variable was %d\n",variable);
+	printf("The variable was %d\n", variable);
 
-	//请添加代码，使用clone函数创建子进程do_something，使用CLONE_VM |CLONE_FILES
+	// 请添加代码，使用clone函数创建子进程do_something，使用CLONE_VM |CLONE_FILES
+	clone(do_something, child_stack + 16384, CLONE_VM | CLONE_FILES, NULL);
+	sleep(3);
 
-	sleep(3);  
-
-	printf("The variable is now %d\n",variable);
+	printf("The variable is now %d\n", variable);
 	return 0;
 }
