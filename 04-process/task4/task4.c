@@ -1,13 +1,12 @@
 #include "stdio.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
 int main()
 {
     int count = 1;
     int child;
     // 请添加代码，创建子进程
-    child = fork();
+    child = vfork();
     if (child == 0)
     {
         // 子进程
@@ -22,7 +21,6 @@ int main()
     else
     {
         // 父进程
-        wait(NULL);
         printf("This is father, his count is: %d, his pid is: %d\n", count, getpid());
     }
 }
