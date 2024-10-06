@@ -129,15 +129,14 @@ int main(int argc, char* argv[]) {
         goto exit3;
     }
     //请增加代码，使用bind函数绑定套接字
-    if (...) {
-
+    if (bind(listensock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         printf("bind error=%\n", errno);
         ret = -3;
         goto exit2;
     }
 
     //请增加代码，使用listen函数监听
-    if (...) {
+    if (listen(listensock, QUESIZE)) {
         printf("listen error=%d\n", errno);
         ret = -4;
         goto exit2;
@@ -161,7 +160,7 @@ int main(int argc, char* argv[]) {
         m = (struct msg*)bufs[rear];  //获得空闲缓冲区
 
         //请增加此处代码，使用 recv函数接收消息头
-        headlen = recv(....);
+        headlen = recv(clientsock, m, sizeof(struct msg), 0);
         if (headlen <= 0) {
             goto exit1;
         }
@@ -171,7 +170,7 @@ int main(int argc, char* argv[]) {
             datalen = 0;
             while (datalen < m->data_len) {
                 //请增加此处代码，使用 recv函数接收消息
-                datalen += recv(....);
+                datalen += recv(clientsock, m + sizeof(struct msg), sizeof(struct msg), 0);
             }
         }
 

@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
     server_addr.sin_port = htons(atoi(port));
 
     //请增加此处代码，使用socket函数完成client请求
-    clientsock= 
+    clientsock= socket()
     if (clientsock < 0) {
         printf("socket create error=%d\n", errno);
         ret = -2;
@@ -155,7 +155,6 @@ int main(int argc, char* argv[]) {
         
         //请增加此处代码，使用send函数完成发送消息
         if (...) {
-
             printf("send error=%d\n", errno);
             ret = -4;
             goto exit1;
