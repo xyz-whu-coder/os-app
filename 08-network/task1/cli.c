@@ -131,14 +131,14 @@ int main(int argc, char* argv[]) {
     server_addr.sin_port = htons(atoi(port));
 
     //请增加此处代码，使用socket函数完成client请求
-    clientsock= socket()
+    clientsock= socket(AF_INET, SOCK_STREAM, 0);
     if (clientsock < 0) {
         printf("socket create error=%d\n", errno);
         ret = -2;
         goto exit2;
     }
     //请增加此处代码，使用connect函数完成连接
-    if (...) {
+    if (connect(clientsock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         printf("connect error=%d\n", errno);
         ret = -3;
         goto exit1;
@@ -154,7 +154,7 @@ int main(int argc, char* argv[]) {
         msglen = sizeof(struct msg) + m->data_len;
         
         //请增加此处代码，使用send函数完成发送消息
-        if (...) {
+        if (send(clientsock, m, msglen, 0) < 0) {
             printf("send error=%d\n", errno);
             ret = -4;
             goto exit1;

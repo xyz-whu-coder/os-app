@@ -130,7 +130,7 @@ int main(int argc, char* argv[]) {
     }
     //请增加代码，使用bind函数绑定套接字
     if (bind(listensock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
-        printf("bind error=%\n", errno);
+        printf("bind error=%d\n", errno);
         ret = -3;
         goto exit2;
     }

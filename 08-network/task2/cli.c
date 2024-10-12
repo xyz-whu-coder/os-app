@@ -36,6 +36,9 @@ int main(int argc, char* argv[]) {
     int msglen;
     time_t start_time, end_time;
     int alive = 1;
+    
+    struct sockaddr_in from_addr;
+    socklen_t from_len = sizeof(struct sockaddr_in);
 
     if (argc < 4) {
         print_usage();
@@ -61,7 +64,7 @@ int main(int argc, char* argv[]) {
     server_addr.sin_port = htons(atoi(port));
 
     //请增加代码，使用socket函数完成client请求
-    clientsock =   // UDP
+    clientsock = socket(AF_INET, SOCK_DGRAM, 0);  // UDP
 
     if (clientsock < 0) {
         printf("socket create error=%d\n", errno);
@@ -78,7 +81,7 @@ int main(int argc, char* argv[]) {
     memcpy(m->data, file_name, m->data_len);
     msglen = sizeof(struct msg) + m->data_len;
     //请增加代码，使用send函数发送消息
-    if (.....) {
+    if (sendto(clientsock, buf, msglen, 0, (struct sockaddr*)&server_addr, sizeof(struct sockaddr_in)) < 0) {
         printf("send MSG_FILENAME error=%d\n", errno);
         ret = -4;
         goto exit1;
@@ -118,7 +121,7 @@ int main(int argc, char* argv[]) {
         }
         
         //请增加代码，使用recvfrom函数接收回复
-        
+        msglen = recvfrom(clientsock, buf2, BUFSIZE, 0, (struct sockaddr*)&from_addr, &from_len);
     }
 
 exit0:

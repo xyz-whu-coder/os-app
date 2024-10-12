@@ -55,8 +55,8 @@ int main(int argc, char* argv[]) {
         goto exit3;
     }
     //请增加代码，使用bind函数进行绑定
-    if (.....) {
-        printf("bind error=%\n", errno);
+    if (bind(serversock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
+        printf("bind error=%d\n", errno);
         ret = -3;
         goto exit2;
     }
@@ -70,10 +70,13 @@ int main(int argc, char* argv[]) {
     addrlen = sizeof(struct sockaddr_in);
     while (1) {
         //请增加代码，使用recvfrom函数接收消息
-        msglen = 
+        msglen = recvfrom(serversock, buf, BUFSIZE, 0, (struct sockaddr*)&client_addr, &addrlen);
 
         //请增加代码，使用sendto函数回复MSG_ACK
-        
+        if (sendto(serversock, buf2, sizeof(struct msg), 0, (struct sockaddr*)&client_addr, addrlen) < 0) {
+            printf("sendto error=%d\n", errno);
+            goto exit1;
+        }
 
         //处理消息
         if (msglen <= 0) {
